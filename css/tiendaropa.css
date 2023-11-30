@@ -1,0 +1,185 @@
+/*TIENDA ROPA*/
+:root {
+    --primario: #D2B48C; /* Tonos nude */
+    --primario-oscuro: #BC8F8F;
+    --secundario: #DAA520; /* Tonos dorados */
+    --secundario-oscuro: #B8860B;
+    --blanco: #F5F5F5; /* Blanco cremoso */
+    --negro: #333;
+    --fuente-principal: 'Staatliches', cursive;
+}
+.header{
+
+    height: 150px;
+}
+.header__logo {
+    width: 200px; /* Ajusta el ancho máximo según tus preferencias */
+    height: 100px; /* Permite que la altura se ajuste automáticamente */
+    margin-top: 0; /* Elimina el margen superior */
+}
+/* apply a natural box layout model to all elements, but allowing components to change */
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+/* Resto del CSS... */
+
+body {
+    margin: 0; /* Elimina el margen predeterminado del body */
+}
+
+.contenedor {
+    max-width: 120rem;
+    margin: 0 auto;
+    padding: 0 20px; /* Agrega márgenes a los lados */
+    background-color: #f5e3e3;
+    padding:40px;
+}
+
+/*GRID*/
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Grid más flexible */
+    gap: 20px; /* Aumentar espacio entre elementos */
+}
+
+@media (min-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(3, 1fr); /* Tres columnas en pantallas más grandes */
+    }
+}
+
+/*PRODUCTOS*/
+.producto {
+    background-color: var(--blanco);
+    padding: 1rem;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Centrar texto en cada producto */
+    margin-bottom: 20px; /* Añade espacio entre las filas de productos */
+}
+
+.producto:hover {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.producto__imagen {
+    width: 100%;
+    height: 300px; /* Aumenta la altura según tus preferencias */
+    object-fit: cover;
+}
+
+.producto__nombre {
+    font-size: 2rem; /* Reducir el tamaño del texto */
+    text-align: center;
+}
+
+.producto__precio {
+    font-size: 1.6rem;
+    color: var(--secundario);
+    text-align: center;
+    margin: 0.5rem 0;
+}
+.producto__precio {
+    font-size: 1.6rem;
+    color: var(--secundario);
+    text-align: center;
+    margin: 0.5rem 0;
+}
+
+/* Centrar título y otros elementos */
+.contenedor {
+    text-align: center;
+}
+
+/*HEADER*/
+.header {
+    display: flex;
+    justify-content: center;
+}
+
+.header__logo {
+    margin: 3rem 0;
+}
+
+/*FOOTER*/
+.footer {
+    background-color: var(--primario-oscuro);
+    padding: 1rem 0;
+    margin-top: 2rem;
+    text-align: center; /* Centrar texto en el pie de página */
+}
+
+.footer__texto {
+    font-family: var(--fuente-principal);
+    font-size: 2.2rem;
+}
+
+/*NAVEGACIÓN*/
+.navegacion {
+    background-color: var(--primario-oscuro);
+    padding: 1rem 0;
+    display: flex;
+    justify-content: center;
+}
+
+.navegacion__enlace {
+    font-family: var(--fuente-principal);
+    color: var(--blanco);
+    font-size: 3rem;
+    margin-right: 2rem;
+}
+
+.navegacion__enlace:last-of-type {
+    margin-right: 0;
+}
+
+.navegacion__enlace--activo,
+.navegacion__enlace:hover {
+    color: var(--secundario);
+}
+
+/* PÁGINA PRODUCTO */
+@media (min-width: 768px) {
+    .camisa {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 2rem;
+    }
+}
+
+.formulario {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.formulario__campo {
+    border: 1rem solid var(--primario-oscuro);
+    background-color: transparent;
+    color: var(--blanco);
+    font-size: 2rem;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 1rem;
+}
+
+.formulario__submit {
+    background-color: var(--secundario);
+    border: none;
+    font-size: 2rem;
+    font-family: var(--fuente-principal);
+    padding: 2rem;
+    transition: background-color .3s ease;
+    grid-column: 1 / 3;
+}
+
+.formulario__submit:hover {
+    cursor: pointer;
+    background-color: var(--secundario-oscuro);
+}
