@@ -21,8 +21,6 @@
 
     <nav class="navegacion">
         <a class="navegacion__enlace navegacion__enlace--activo" href="login.php">Inicio</a>
-        <a class="navegacion__enlace" href="">Modificar</a>
-        <a class="navegacion__enlace" href="">Borrar</a>
         <a class="navegacion__enlace" href="">añadir</a>
     </nav>
 
@@ -47,6 +45,8 @@
                     <div class="producto__informacion">
                         <p class="producto__nombre">Falda Olympia</p>
                         <p class="producto__precio">30€</p>
+                        <a class="producto__precio " href="">Modificar</a>
+                        <a class="producto__precio " href="">Borrar</a>
                     </div>
              
             </div> <!--.producto-->
@@ -56,6 +56,8 @@
                     <div class="producto__informacion">
                         <p class="producto__nombre">Camiseta Rayas</p>
                         <p class="producto__precio">6€</p>
+                        <a class="producto__precio " href="">Modificar</a>
+                        <a class="producto__precio " href="">Borrar</a>
                     </div>
             
             </div> <!--.producto-->
@@ -65,6 +67,8 @@
                     <div class="producto__informacion">
                         <p class="producto__nombre">Camisa blanca</p>
                         <p class="producto__precio">20€</p>
+                        <a class="producto__precio " href="">Modificar</a>
+                        <a class="producto__precio " href="">Borrar</a>
                     </div>
             
             </div> <!--.producto-->
@@ -74,6 +78,8 @@
                     <div class="producto__informacion">
                         <p class="producto__nombre">Camisa azul</p>
                         <p class="producto__precio">25€</p>
+                        <a class="producto__precio " href="">Modificar</a>
+                        <a class="producto__precio " href="">Borrar</a>
                     </div>
               
             </div> <!--.producto-->
@@ -83,6 +89,8 @@
                     <div class="producto__informacion">
                         <p class="producto__nombre">Camisa cuadros</p>
                         <p class="producto__precio">7€</p>
+                        <a class="producto__precio " href="">Modificar</a>
+                        <a class="producto__precio " href="">Borrar</a>
                     </div>
               
             </div> <!--.producto-->
@@ -92,6 +100,8 @@
                     <div class="producto__informacion">
                         <p class="producto__nombre">Camisa cuadros</p>
                         <p class="producto__precio">40€</p>
+                        <a class="producto__precio " href="">Modificar</a>
+                        <a class="producto__precio " href="">Borrar</a>
                     </div>
              
             </div> <!--.producto-->
@@ -101,6 +111,8 @@
                     <div class="producto__informacion">
                         <p class="producto__nombre">Camisa camionero</p>
                         <p class="producto__precio">15€</p>
+                        <a class="producto__precio " href="">Modificar</a>
+                        <a class="producto__precio " href="">Borrar</a>
                     </div>
                
             </div> <!--.producto-->
@@ -110,6 +122,8 @@
                     <div class="producto__informacion">
                         <p class="producto__nombre">Camisa especial</p>
                         <p class="producto__precio">40€</p>
+                        <a class="producto__precio " href="">Modificar</a>
+                        <a class="producto__precio " href="">Borrar</a>
                     </div>
                
             </div> <!--.producto-->
@@ -119,6 +133,8 @@
                     <div class="producto__informacion">
                         <p class="producto__nombre">Camisa ross</p>
                         <p class="producto__precio">40€</p>
+                        <a class="producto__precio " href="">Modificar</a>
+                        <a class="producto__precio " href="">Borrar</a>
                     </div>
               
             </div> <!--.producto-->
@@ -128,6 +144,8 @@
                     <div class="producto__informacion">
                         <p class="producto__nombre">Camisa cuadros</p>
                         <p class="producto__precio">25€</p>
+                        <a class="producto__precio " href="">Modificar</a>
+                        <a class="producto__precio " href="">Borrar</a>
                     </div>
               
             </div> <!--.producto-->
@@ -137,6 +155,8 @@
                     <div class="producto__informacion">
                         <p class="producto__nombre">Camisa leñador</p>
                         <p class="producto__precio">25€</p>
+                        <a class="producto__precio " href="">Modificar</a>
+                        <a class="producto__precio " href="">Borrar</a>
                     </div>
             
             </div> <!--.producto-->
@@ -146,6 +166,8 @@
                     <div class="producto__informacion">
                         <p class="producto__nombre">Vestido cena</p>
                         <p class="producto__precio">50€</p>
+                        <a class="producto__precio " href="">Modificar</a>
+                        <a class="producto__precio " href="">Borrar</a>
                     </div>
              
             </div> <!--.producto-->
@@ -155,6 +177,8 @@
                     <div class="producto__informacion">
                         <p class="producto__nombre">Conjunto playa</p>
                         <p class="producto__precio">15€</p>
+                        <a class="producto__precio " href="">Modificar</a>
+                        <a class="producto__precio " href="">Borrar</a>
                     </div>
               
             </div> <!--.producto-->
@@ -164,6 +188,8 @@
                     <div class="producto__informacion">
                         <p class="producto__nombre">chandal del rollo</p>
                         <p class="producto__precio">30€</p>
+                        <a class="producto__precio " href="">Modificar</a>
+                        <a class="producto__precio " href="">Borrar</a>
                     </div>
               
             </div> <!--.producto-->
