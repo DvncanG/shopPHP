@@ -14,17 +14,28 @@
     <div class="container">
 
         <?php
-        include("DB.php"); // Incluir el archivo de conexión a la base de datos
-        
-        session_start();
+include("DB.php"); // Incluir el archivo de conexión a la base de datos
+session_start();
 
-        // Verificar si se ha enviado el formulario
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $nombre = $_POST["nombre"];
-            $contrasena = $_POST["contrasena"];
+// Verificar si el usuario ya está autenticado
+if (isset($_SESSION['usuario'])) {
+    // El usuario ya está autenticado, redirigir según el rol almacenado en la sesión
+    if ($_SESSION["rol"] == "admin") {
+        header("Location: pagina_admin.php");
+        exit();
+    } elseif ($_SESSION["rol"] == "usuario") {
+        header("Location: pagina_usuario.php");
+        exit();
+    }
+}
 
-            // Reconectar si es necesario
-            $conn = $db->reconectar();
+// Verificar si se ha enviado el formulario
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $nombre = $_POST["nombre"];
+    $contrasena = $_POST["contrasena"];
+
+    // Reconectar si es necesario
+    $conn = $db->reconectar();
 
             // Utilizar una sentencia preparada para evitar la inyección SQL
             $sql = "SELECT * FROM usuarios WHERE nombre = ? AND contrasena = ?";

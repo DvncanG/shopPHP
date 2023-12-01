@@ -20,7 +20,7 @@
     </header>
 
     <nav class="navegacion">
-        <a class="navegacion__enlace navegacion__enlace--activo" href="login.php">Inicio</a>
+        <a class="navegacion__enlace navegacion__enlace--activo" href="logout.php">Inicio</a>
         <a class="navegacion__enlace" href="./addProducto.php">añadir</a>
     </nav>
 
