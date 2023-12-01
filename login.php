@@ -14,30 +14,30 @@
     <div class="container">
 
         <?php
-include("DB.php"); // Incluir el archivo de conexión a la base de datos
-session_start();
+        include("DB.php"); // Incluir el archivo de conexión a la base de datos
+        session_start();
 
-// Verificar si el usuario ya está autenticado
-if (isset($_SESSION['usuario'])) {
-    // El usuario ya está autenticado, redirigir según el rol almacenado en la sesión
-    if ($_SESSION["rol"] == "admin") {
-        header("Location: pagina_admin.php");
-        exit();
-    } elseif ($_SESSION["rol"] == "usuario") {
-        header("Location: pagina_usuario.php");
-        exit();
-    }
-}
+        // Verificar si el usuario ya está autenticado
+        if (isset($_SESSION['usuario'])) {
+            // El usuario ya está autenticado, redirigir según el rol almacenado en la sesión
+            if ($_SESSION["rol"] == "admin") {
+                header("Location: pagina_admin.php");
+                exit();
+            } elseif ($_SESSION["rol"] == "usuario") {
+                header("Location: pagina_usuario.php");
+                exit();
+            }
+        }
 
-// Verificar si se ha enviado el formulario
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nombre = $_POST["nombre"];
-    $contrasena = $_POST["contrasena"];
+        // Verificar si se ha enviado el formulario
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $nombre = $_POST["nombre"];
+            $contrasena = $_POST["contrasena"];
 
-    // Reconectar si es necesario
-    $conn = $db->reconectar();
+            // Reconectar si es necesario
+            $conn = $db->reconectar();
 
-            // Utilizar una sentencia preparada para evitar la inyección SQL
+            // Lógica de autenticación
             $sql = "SELECT * FROM usuarios WHERE nombre = ? AND contrasena = ?";
             $stmt = $conn->prepare($sql);
 
@@ -53,33 +53,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 die("Error en la ejecución de la consulta: " . $stmt->error);
             }
 
+            // Verificar si las credenciales son correctas
             if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
 
-                // Configurar la cookie de sesión para que sea persistente durante 30 días (ajusta según tus necesidades)
-                $expire = time() + (6 * 60 * 60); // 6 horas
-                setcookie(session_name(), session_id(), $expire, "/");
-
+                // Establecer la sesión
+                $_SESSION["usuario"] = $nombre;
                 $_SESSION["rol"] = $row["rol"];
 
+                // Redirigir según el rol almacenado en la sesión
                 if ($_SESSION["rol"] == "admin") {
                     header("Location: pagina_admin.php");
-                    exit(); // Asegura que el script se detenga después de la redirección
+                    exit();
                 } elseif ($_SESSION["rol"] == "usuario") {
                     header("Location: pagina_usuario.php");
-                    exit(); // Asegura que el script se detenga después de la redirección
-                } else {
-                    echo "Rol no válido";
+                    exit();
                 }
             } else {
                 echo "Credenciales incorrectas";
             }
 
-            // Cerrar la sentencia preparada
+            // Cerrar la conexión y la sentencia preparada
             $stmt->close();
+            $conn->close();
         }
-
-        // No cerramos explícitamente la conexión aquí, dejamos que PHP maneje la liberación de recursos al final del script
         ?>
         <h2>SHOP-PHP</h2>
         <h2>Iniciar sesión</h2>
