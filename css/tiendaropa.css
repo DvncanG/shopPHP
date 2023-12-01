@@ -64,6 +64,11 @@ body {
     text-align: center; /* Centrar texto en cada producto */
     margin-bottom: 20px; /* Añade espacio entre las filas de productos */
 }
+.producto-modificar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .producto:hover {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
@@ -86,12 +91,7 @@ body {
     text-align: center;
     margin: 0.5rem 0;
 }
-.producto__precio {
-    font-size: 1.6rem;
-    color: var(--secundario);
-    text-align: center;
-    margin: 0.5rem 0;
-}
+
 
 /* Centrar título y otros elementos */
 .contenedor {

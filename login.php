@@ -2,102 +2,87 @@
 <!DOCTYPE html>
 <html lang="es">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Iniciar sesión</title>
-         <link rel="stylesheet" type="text/css" href="css/style.css">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
 
-    <body>
+<body>
 
-        <div class="container">
+    <div class="container">
 
-            <?php
-            include("DB.php"); // Incluir el archivo de conexión a la base de datos
+        <?php
+        include("DB.php"); // Incluir el archivo de conexión a la base de datos
+        
+        session_start();
 
-            session_start();
+        // Verificar si se ha enviado el formulario
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $nombre = $_POST["nombre"];
+            $contrasena = $_POST["contrasena"];
 
-            // Función para reconectar si es necesario
-            function reconectar() {
-                global $conn, $servername, $username, $password, $dbname;
+            // Reconectar si es necesario
+            $conn = $db->reconectar();
 
-                if ($conn->ping() === false) {
-                    $conn = new mysqli($servername, $username, $password, $dbname);
+            // Utilizar una sentencia preparada para evitar la inyección SQL
+            $sql = "SELECT * FROM usuarios WHERE nombre = ? AND contrasena = ?";
+            $stmt = $conn->prepare($sql);
 
-                    if ($conn->connect_error) {
-                        die("Conexión fallida: " . $conn->connect_error);
-                    }
-                }
-
-                return $conn;
+            if (!$stmt) {
+                die("Error en la preparación de la consulta: " . $conn->error);
             }
 
-            // Verificar si se ha enviado el formulario
-            if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                $nombre = $_POST["nombre"];
-                $contrasena = $_POST["contrasena"];
+            $stmt->bind_param("ss", $nombre, $contrasena);
+            $stmt->execute();
+            $result = $stmt->get_result();
 
-                // Reconectar si es necesario
-                $conn = reconectar();
+            if (!$result) {
+                die("Error en la ejecución de la consulta: " . $stmt->error);
+            }
 
-                // Utilizar una sentencia preparada para evitar la inyección SQL
-                $sql = "SELECT * FROM usuarios WHERE nombre = ? AND contrasena = ?";
-                $stmt = $conn->prepare($sql);
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
 
-                if (!$stmt) {
-                    die("Error en la preparación de la consulta: " . $conn->error);
-                }
+                // Configurar la cookie de sesión para que sea persistente durante 30 días (ajusta según tus necesidades)
+                $expire = time() + (6 * 60 * 60); // 6 horas
+                setcookie(session_name(), session_id(), $expire, "/");
 
-                $stmt->bind_param("ss", $nombre, $contrasena);
-                $stmt->execute();
-                $result = $stmt->get_result();
+                $_SESSION["rol"] = $row["rol"];
 
-                if (!$result) {
-                    die("Error en la ejecución de la consulta: " . $stmt->error);
-                }
-
-                if ($result->num_rows > 0) {
-                    $row = $result->fetch_assoc();
-
-                    // Configurar la cookie de sesión para que sea persistente durante 30 días (ajusta según tus necesidades)
-                    $expire = time() + (6 * 60 * 60); // 6 horas
-                    setcookie(session_name(), session_id(), $expire, "/");
-
-                    $_SESSION["rol"] = $row["rol"];
-
-                    if ($_SESSION["rol"] == "admin") {
-                        header("Location: pagina_admin.php");
-                        exit(); // Asegura que el script se detenga después de la redirección
-                    } elseif ($_SESSION["rol"] == "usuario") {
-                        header("Location: pagina_usuario.php");
-                        exit(); // Asegura que el script se detenga después de la redirección
-                    } else {
-                        echo "Rol no válido";
-                    }
+                if ($_SESSION["rol"] == "admin") {
+                    header("Location: pagina_admin.php");
+                    exit(); // Asegura que el script se detenga después de la redirección
+                } elseif ($_SESSION["rol"] == "usuario") {
+                    header("Location: pagina_usuario.php");
+                    exit(); // Asegura que el script se detenga después de la redirección
                 } else {
-                    echo "Credenciales incorrectas";
+                    echo "Rol no válido";
                 }
-
-                // Cerrar la sentencia preparada
-                $stmt->close();
+            } else {
+                echo "Credenciales incorrectas";
             }
 
-            // No cerramos explícitamente la conexión aquí, dejamos que PHP maneje la liberación de recursos al final del script
-            ?>
-            <h2>SHOP-PHP</h2>
-            <h2>Iniciar sesión</h2>
-            <form class="formulario" action="login.php" method="post">
-                <label class="label_formulario" for="nombre">Nombre:</label>
-                <input class= "input_formulario" type="text" id="nombre" name="nombre" required><br>
+            // Cerrar la sentencia preparada
+            $stmt->close();
+        }
 
-                <label class="label_formulario" for="contrasena">Contraseña:</label>
-                <input class= "input_formulario" type="password" id="contrasena" name="contrasena" required><br>
+        // No cerramos explícitamente la conexión aquí, dejamos que PHP maneje la liberación de recursos al final del script
+        ?>
+        <h2>SHOP-PHP</h2>
+        <h2>Iniciar sesión</h2>
+        <form class="formulario" action="login.php" method="post">
+            <label class="label_formulario" for="nombre">Nombre:</label>
+            <input class="input_formulario" type="text" id="nombre" name="nombre" required><br>
 
-                <input class= "input_formulario" type="submit" value="Iniciar sesión">
-            </form>
-        </div>
+            <label class="label_formulario" for="contrasena">Contraseña:</label>
+            <input class="input_formulario" type="password" id="contrasena" name="contrasena" required><br>
 
-    </body>
+            <input class="input_formulario" type="submit" value="Iniciar sesión">
+        </form>
+    </div>
+
+</body>
 
 </html>
